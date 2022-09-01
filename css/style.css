@@ -207,3 +207,7 @@ a{
     display: none;
   }
 }
+
+.is-visible {
+  display: none;
+}
