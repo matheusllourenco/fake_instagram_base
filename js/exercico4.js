@@ -1,3 +1,3 @@
 const [inputName] = document.getElementsByName('name');
 
-inputName.placeholder = 'Digite abacaxi';
+inputName.placeholder = 'Digite seu nome';
