@@ -16,10 +16,15 @@ function isInputValid(name, value) {
         case 'surname':
             return value.length > 2 && value.length < 100;
         case 'username':
-            return value.length > 10 && value.length < 15;
+            return value.length > 2 && value.length < 15;
         default: 
-            return false;
+            return true;
     }
+}
+
+function registerUser(data) {
+    console.log(data);
+    /** Chamar api */
 }
 
 formRegisterElement.onsubmit = (event) => {
@@ -27,20 +32,41 @@ formRegisterElement.onsubmit = (event) => {
 
     const { name , email, password, surname, username } = formRegisterElement;
     
-    const inputs = [ name , email, password, surname, username];
-    
-    inputs.forEach(input => {
+    const userData = { name , email, password, surname, username };
+
+    let isFormInvalid = false;
+
+    Object.keys(userData).forEach(key => {
+        const input = userData[key];
         const spanElement = input.nextElementSibling;
         const isValid = isInputValid(input.name, input.value.trim());
 
         if(!isValid) {
+           isFormInvalid = true;
            spanElement.style.display = 'block';
            spanElement.innerHTML = `Campo ${input.name} vazio`;
-        }else {
-           spanElement.style.display = 'none';
+           
+           return;
         }
-    })
 
+        spanElement.style.display = 'none';        
+    });
+
+    if(isFormInvalid) {
+        return;
+    }
+
+    console.log('enviando para api....');
+
+    const payload = {
+        name: userData.name.value,
+        surname: userData.surname.value,
+        username: userData.username.value,
+        email: userData.email.value,
+        password: userData.password.value,
+    }
+
+    registerUser(payload);
     // const inputs = [...formRegisterElement];
 
     // console.log(inputs);
