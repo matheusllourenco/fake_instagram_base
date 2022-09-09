@@ -62,3 +62,9 @@ function exercico3() {
 exercico1();
 exercico3();
 extra();
+
+const username = localStorage.getItem('username');
+
+const usernameElement = document.querySelector('div.avatar-content strong');
+
+usernameElement.innerText = username;
