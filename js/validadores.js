@@ -22,8 +22,24 @@ function isInputValid(name, value) {
     }
 }
 
-function registerUser(data) {
-    console.log(data);
+async function registerUser(data) {
+    try {
+        const response = await fetch('http://localhost:3333/users', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        console.log(response);
+    
+        const user = await response.json();
+
+        localStorage.setItem('username', user.username);
+    } catch (error) {
+        console.error(error);
+    }
     /** Chamar api */
 }
 
